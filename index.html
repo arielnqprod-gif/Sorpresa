@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flores Amarillas 🌼</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+
+      /* Imagen de fondo */
+      background-image: url('fondo3.png'); /* Cambia por tu imagen */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Contenedor de contenido encima */
+    .contenido {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #ramo {
+      width: 240px;
+      max-width: 60vw;
+      margin-bottom: 20px;
+    }
+
+    #mensaje {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #444;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 12px 18px;
+      border-radius: 12px;
+      max-width: 90%;
+      cursor: pointer;
+    }
+
+    .flor {
+      position: absolute;
+      top: -50px;
+      width: 40px;
+      height: 40px;
+      background-image: url("flor.png");
+      background-size: cover;
+      animation: caer linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes caer {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Contenido encima -->
+  <div class="contenido">
+    <img id="ramo" src="ramo2.png" alt="Ramo de Flores Amarillas">
+    <p id="mensaje">Toca la pantalla para descubrir un mensaje 💛</p>
+  </div>
+
+  <script>
+    // Mensajes
+    const mensajes = [
+      "Hola señorita Constanza 🌼",
+      "Conmigo no seras espectadora 💛",
+      "Estas flores son unicamente para ti ✨",
+      "¿Por qué?",
+      "La respuesta es simple",
+      "Te quiero 💕"
+    ];
+
+    const mensaje = document.getElementById("mensaje");
+    let index = 0;
+
+    // Cambiar mensaje al tocar
+    document.body.addEventListener("click", () => {
+      mensaje.textContent = mensajes[index];
+      index = (index + 1) % mensajes.length;
+    });
+
+    // Flores cayendo
+    function crearFlor() {
+      const flor = document.createElement("div");
+      flor.classList.add("flor");
+      flor.style.left = Math.random() * 100 + "vw";
+      flor.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(flor);
+      setTimeout(() => { flor.remove(); }, 6000);
+    }
+
+    setInterval(crearFlor, 400);
+  </script>
+  <footer style="position:fixed; bottom:10px; width:100%; text-align:center; font-size:0.8rem; color:#888;">
+  © 2025 Ariel — MIT License
+  <br>
+  <a href="LICENSE.txt" target="_blank" style="color:#888;">Ver licencia completa</a>
+</footer>
+</body>
+</html>
